@@ -6,9 +6,17 @@ GitHub - ShlenkinVV
 from aiogram import F, Router
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery
+from aiogram.fsm.state import StatesGroup, State
+from aiogram.fsm.context import FSMContext
+
 import app.keyboards as kb
 
 router = Router()
+
+# Класс состояний
+class Reg(StatesGroup):
+    name = State()
+    relation = State()
 
 @router.message(Command('help'))
 async def get_help(message: Message):
@@ -28,5 +36,27 @@ async def get_photo(message: Message):
 
 @router.callback_query(F.data == 'catalog')
 async def get_catalog(callback: CallbackQuery):
-    await callback.answer('То что ты пидор, ёпта')
+    await callback.answer('То что ты пидор, ёпта') # Либо текст, либо путсые скобки
     await callback.message.answer('Это каталог')
+
+
+
+#Использование состояний
+@router.message(Command('reg'))
+async def reg_one(message: Message, state: FSMContext):
+    await state.set_state(Reg.name)     # Меняем состояние
+    await message.answer('Введите Ваше имя')
+
+
+@router.message(Reg.name)       # принмаем состояние
+async def reg_two(message: Message, state: FSMContext):
+    await state.update_data(name=message.text)
+    await state.set_state(Reg.relation)  # Меняем состояние
+    await message.answer('Кем вы приходитесь разрабу?(другом, сестрой, котом и т.д.)')
+
+@router.message(Reg.relation)
+async def reg_three(message: Message, state: FSMContext):
+    await state.update_data(relation=message.text)
+    data = await state.get_data()
+    await message.answer('Спасибо за регистрацию')
+    await state.clear()
