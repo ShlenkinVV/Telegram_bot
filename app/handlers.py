@@ -10,8 +10,12 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 
 import app.keyboards as kb
+from app.middleware import TestMiddleware
 
 router = Router()
+
+router.message.middleware(TestMiddleware()) # подключаем middleware к роутеру, работает при каждом сообщении
+router.message.outer_middleware(TestMiddleware()) # Срабатывает вне зависимости от того, нашелся ли обработчик или нет
 
 # Класс состояний
 class Reg(StatesGroup):
