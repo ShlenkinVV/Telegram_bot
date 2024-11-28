@@ -5,17 +5,18 @@ GitHub - ShlenkinVV
 
 from aiogram import F, Router
 from aiogram.filters import CommandStart, Command
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
+import app.keyboards as kb
 
 router = Router()
 
 @router.message(Command('help'))
 async def get_help(message: Message):
-    await message.answer('Это команда /help')
+    await message.answer('Это команда /help', reply_markup=kb.dev_acc)
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.answer(f'Привет, {message.from_user.first_name}. Заходи - не бойся, выходи - не плачь')
+    await message.answer(f'Привет, {message.from_user.first_name}. Заходи - не бойся, выходи - не плачь', reply_markup=kb.main)
 
 @router.message(F.text == 'Как дела?')
 async def how_are_you(message: Message):
@@ -24,3 +25,8 @@ async def how_are_you(message: Message):
 @router.message(F.photo)
 async def get_photo(message: Message):
     await message.answer(f'ID photo: {message.photo[-1].file_id}')
+
+@router.callback_query(F.data == 'catalog')
+async def get_catalog(callback: CallbackQuery):
+    await callback.answer('То что ты пидор, ёпта')
+    await callback.message.answer('Это каталог')
