@@ -8,7 +8,7 @@ import logging
 from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv
 
-from app.handlers import router
+from app.handlers import main_router
 from app.database.models import async_main
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -22,7 +22,7 @@ async def main():
     await async_main()
     bot = Bot(token=API_TOKEN)
     dp = Dispatcher()
-    dp.include_router(router)
+    dp.include_router(main_router)
     await dp.start_polling(bot)
 
 
