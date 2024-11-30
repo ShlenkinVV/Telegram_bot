@@ -1,9 +1,10 @@
-from aiogram import F, Router
+from aiogram import Router
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from aiogram.filters import Command
 import app.database.requests as rq
+import app.keyboards as kb
 
 router = Router()
 # Класс состояний
@@ -28,6 +29,6 @@ async def reg_two(message: Message, state: FSMContext):
 async def reg_three(message: Message, state: FSMContext):
     await state.update_data(relation=message.text)
     data = await state.get_data()
-    await rq.add_user(message.from_user.id, data['name'], data['relation'])
-    await message.answer(f'Спасибо за регистрацию {data['name']}')
+    await rq.add_user(message.from_user.id, message.from_user.username, data['name'], data['relation'])
+    await message.answer(f'Спасибо за регистрацию, {data['name']}', reply_markup=kb.main)
     await state.clear()

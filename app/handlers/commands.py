@@ -36,3 +36,15 @@ async def delete_user(message: Message):
                 await message.reply(f"Произошла ошибка при удалении пользователя: {str(e)}")
         else:
             await message.reply("Пожалуйста, укажите id пользователя для удаления.")
+
+@router.message(Command('users'))
+async def get_users_info(message: Message):
+    if str(message.from_user.id) != ADMIN_ID:
+        await message.answer(f'Смотреть данные пользователей может только админ')
+    else:
+        all_users = await rq.get_users()
+        text = ''
+        for user in all_users:
+            text += f'{user.id}) {user.name} - {user.relation} ({user.tg_username})\n'
+
+        await message.answer(text)

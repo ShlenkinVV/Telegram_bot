@@ -8,8 +8,10 @@ router = Router()
 async def get_users(message: Message):
     all_users = await rq.get_users()
     text = 'Список пользователей:\n'
+    i=1
     for user in all_users:
-        text+=f'{user.id}) {user.name} - {user.relation}\n'
+        text+=f'{i}) {user.name} - {user.relation}\n'
+        i+=1
     await message.answer(text)
 
 @router.message(F.text == 'Анекдот')
