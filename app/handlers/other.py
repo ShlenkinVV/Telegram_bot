@@ -1,6 +1,8 @@
 from aiogram import F, Router
 from aiogram.types import Message
 import app.database.requests as rq
+from app.anekdots import aneks
+from random import randint
 
 router = Router()
 
@@ -16,4 +18,9 @@ async def get_users(message: Message):
 
 @router.message(F.text == 'Анекдот')
 async def get_anek(message: Message):
-    pass
+    anek = aneks[randint(0, len(aneks)-1)]
+    await message.answer(anek)
+
+@router.message(F.text == 'Не нажимать')
+async def get_angry(message: Message):
+    await message.answer('Написано же "Не нажиамть"!!!')

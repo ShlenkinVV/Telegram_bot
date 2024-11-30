@@ -17,7 +17,9 @@ async def get_help(message: Message):
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.answer(f'Привет, {message.from_user.first_name}. Заходи - не бойся, выходи - не плачь', reply_markup=kb.main)
+    await message.answer(f"""
+    Привет, {message.from_user.first_name}. Заходи - не бойся, выходи - не плачь\n
+/help - помощь\n/reg - регистрация""", reply_markup=kb.main)
 
 @router.message(Command('delete_user'))
 async def delete_user(message: Message):

@@ -7,7 +7,7 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
 
 main = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Анекдот')],
-    [KeyboardButton(text='Все пользователи', callback_data='get_users' ), KeyboardButton(text='Контакты')]
+    [KeyboardButton(text='Все пользователи', callback_data='get_users' ), KeyboardButton(text='Не нажимать')]
 ], resize_keyboard=True,
     input_field_placeholder='Смотри вниз')
 

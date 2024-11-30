@@ -5,6 +5,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 import app.database.requests as rq
 import app.keyboards as kb
+from aiogram.types import ReplyKeyboardRemove
 
 router = Router()
 # Класс состояний
@@ -16,7 +17,7 @@ class Reg(StatesGroup):
 @router.message(Command('reg'))
 async def reg_one(message: Message, state: FSMContext):
     await state.set_state(Reg.name)     # Меняем состояние
-    await message.answer('Введите Ваше имя')
+    await message.answer('Введите Ваше имя', reply_markup=ReplyKeyboardRemove())
 
 
 @router.message(Reg.name)       # принмаем состояние

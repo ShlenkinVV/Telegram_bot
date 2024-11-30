@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv('.env')
 
+#engine = create_async_engine(url=os.getenv('BD_URL3')) # создание БД
 engine = create_async_engine(url=os.getenv('BD_URL')) # создание БД
 #engine = create_async_engine(url='sqlite+aiosqlite:///db.sqlite3') # создание БД
 
