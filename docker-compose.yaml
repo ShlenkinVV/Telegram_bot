@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:14
+    container_name: database
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - tg_bot_vol:/var/lib/postgresql/data
+    networks:
+      - tg_bot_net
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+  tg_bot:
+    image: tg_bot_img
+    container_name: tg_bot
+    environment:
+      TOKEN: ${TOKEN}
+      ADMIN_ID: ${ADMIN_ID}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+    networks:
+      - tg_bot_net
+    depends_on:
+      database:
+        condition: service_healthy
+
+
+
+volumes:
+  tg_bot_vol:
+    name: tg_bot_vol
+
+networks:
+  tg_bot_net:
+    name: tg_bot_net
