@@ -9,6 +9,9 @@ async def add_user(tg_id, tg_username, username, relation):
         if not user:
             session.add(User(tg_id=tg_id, tg_username=tg_username, name=username, relation=relation))
             await session.commit()
+            return True
+        else:
+            return False
 
 
 async def get_users():

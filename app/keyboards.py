@@ -7,7 +7,7 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
 
 main = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Анекдот')],
-    [KeyboardButton(text='Все пользователи', callback_data='get_users' ), KeyboardButton(text='Не нажимать')]
+    [KeyboardButton(text='История пользователей', callback_data='get_users' ), KeyboardButton(text='Не нажимать')]
 ], resize_keyboard=True,
     input_field_placeholder='Смотри вниз')
 
@@ -19,4 +19,8 @@ main = ReplyKeyboardMarkup(keyboard=[
 
 dev_acc = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Связь с админом', url='https://t.me/uzi_smuzi')]
+])
+
+cancel_registration = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Отмена', callback_data='cancel_registration')]
 ])
