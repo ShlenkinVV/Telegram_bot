@@ -1,4 +1,4 @@
-from sqlalchemy import BigInteger, String
+from sqlalchemy import BigInteger, String, Integer
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine
 import os
@@ -20,6 +20,14 @@ async_session = async_sessionmaker(engine) # Подкючение к БД
 
 class Base(AsyncAttrs, DeclarativeBase):
     pass
+
+class Task(Base):
+    __tablename__ = 'tasks'
+
+    id: Mapped[int]= mapped_column(primary_key=True, autoincrement=True)
+    description: Mapped[str] = mapped_column(String(100), nullable=False)
+    completed = mapped_column(Integer, default=0)
+    user_id = mapped_column(BigInteger, nullable=False)
 
 class User(Base):
     __tablename__ = 'users'

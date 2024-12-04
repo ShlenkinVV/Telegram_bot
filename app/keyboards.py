@@ -2,12 +2,13 @@
 author - Shlenkin Vladimir
 GitHub - ShlenkinVV
 """
+
 from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup, InlineKeyboardButton)
 
 main = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Анекдот')],
-    [KeyboardButton(text='История пользователей', callback_data='get_users' ), KeyboardButton(text='Не нажимать')]
+    [KeyboardButton(text='История пользователей', callback_data='get_users' ), KeyboardButton(text='Мои задачи')]
 ], resize_keyboard=True,
     input_field_placeholder='Смотри вниз')
 
@@ -23,4 +24,18 @@ dev_acc = InlineKeyboardMarkup(inline_keyboard=[
 
 cancel_registration = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Отмена', callback_data='cancel_registration')]
+])
+
+tasks = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Добавить задачу', callback_data='add_task')],
+    [InlineKeyboardButton(text='Удалить задачу', callback_data='remove_task')]
+])
+
+
+tasks_empty = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Добавить задачу', callback_data='add_task')]
+])
+
+cancel_add_task = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Отмена', callback_data='cancel_add_task')]
 ])
