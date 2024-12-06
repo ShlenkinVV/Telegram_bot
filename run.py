@@ -17,10 +17,11 @@ if os.path.exists(dotenv_path):
 
 API_TOKEN = os.getenv('TOKEN')
 
+bot = Bot(token=API_TOKEN)
 
 async def main():
     await async_main()
-    bot = Bot(token=API_TOKEN)
+
     dp = Dispatcher()
     dp.include_router(main_router)
     await dp.start_polling(bot)

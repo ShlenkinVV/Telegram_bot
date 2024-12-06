@@ -1,5 +1,5 @@
 from app.database.models import async_session
-from app.database.models import User, Task
+from app.database.models import User, Task, AllUsers
 from sqlalchemy import select, update, delete, desc
 
 async def add_user(tg_id, tg_username, username, relation):
@@ -14,14 +14,30 @@ async def add_user(tg_id, tg_username, username, relation):
             return False
 
 
+
 async def get_users():
     async with async_session() as session:
         return await session.scalars(select(User))
 
+async def catch_user(tg_id, tg_username):
+    async with async_session() as session:
+        user = await session.scalar(select(AllUsers).where(tg_id == AllUsers.tg_id))
+        if not user:
+            session.add(AllUsers(tg_id=tg_id, tg_username=tg_username))
+            await session.commit()
+            return True
+        else:
+            return False
+
+
+
+async def get_all_users():
+    async with async_session() as session:
+        return await session.scalars(select(AllUsers))
+
 
 async def delete_user(user_id):
     async with async_session() as session:
-        # Ищем пользователя по id
         user = await session.scalar(select(User).where(User.id == user_id))
 
         if user:

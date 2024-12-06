@@ -38,6 +38,12 @@ class User(Base):
     relation: Mapped[str] = mapped_column(String(25))
     tg_username: Mapped[str] = mapped_column(String(25))
 
+class AllUsers(Base):
+    __tablename__ = 'all_users'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    tg_id = mapped_column(BigInteger)
+    tg_username: Mapped[str] = mapped_column(String(25))
+
 async def async_main():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all) # Создаются классы

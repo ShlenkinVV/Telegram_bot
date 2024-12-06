@@ -58,6 +58,7 @@ async def list_tasks(message: Message,  user_id=None):
     else:
         await message.answer("У вас пока нет задач.", reply_markup=kb.tasks_empty)
 
+
 @router.callback_query(F.data == 'remove_task', StateFilter(None))
 async def remove_task_command(callback: CallbackQuery, state: FSMContext):
     await state.set_state(RmTaskState.waiting_for_rm_task)
