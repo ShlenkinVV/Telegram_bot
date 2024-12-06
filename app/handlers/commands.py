@@ -1,5 +1,5 @@
 from aiogram import Router
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command, CommandStart, StateFilter
 from aiogram.types import Message
 import app.database.requests as rq
 import os
@@ -11,7 +11,7 @@ load_dotenv('.env')
 
 ADMIN_ID = os.getenv('ADMIN_ID')
 
-@router.message(Command('help'))
+@router.message(Command('help'), StateFilter(None))
 async def get_help(message: Message):
     await message.answer('Это команда /help', reply_markup=kb.dev_acc)
 
@@ -50,3 +50,16 @@ async def get_users_info(message: Message):
             text += f'{user.id}) {user.name} - {user.relation} ({user.tg_username})\n'
 
         await message.answer(text)
+
+@router.message(Command('all_users'))
+async def get_all_users(message: Message):
+    if str(message.from_user.id) != ADMIN_ID:
+        await message.answer(f'Смотреть данные пользователей может только админ')
+    else:
+        all_users = await rq.get_users()
+        text = ''
+        for user in all_users:
+            text += f'{user.id}) {user.name} - {user.relation} ({user.tg_username})\n'
+
+        await message.answer(text)
+

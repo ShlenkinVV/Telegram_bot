@@ -9,8 +9,7 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
 main = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Анекдот')],
     [KeyboardButton(text='История пользователей', callback_data='get_users' ), KeyboardButton(text='Мои задачи')]
-], resize_keyboard=True,
-    input_field_placeholder='Смотри вниз')
+], resize_keyboard=True)
 
 # main = InlineKeyboardMarkup(inline_keyboard=[
 #     [InlineKeyboardButton(text='Каталог', callback_data='catalog')],

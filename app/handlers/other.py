@@ -1,4 +1,7 @@
 from aiogram import F, Router
+from aiogram.filters import StateFilter
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message
 import app.database.requests as rq
 from app.anekdots import aneks
@@ -6,7 +9,11 @@ from random import randint
 
 router = Router()
 
-@router.message(F.text == 'История пользователей')
+class MainState(StatesGroup):
+    main = State()
+
+
+@router.message(F.text == 'История пользователей', StateFilter(None))
 async def get_users(message: Message):
     all_users = await rq.get_users()
     text = 'Список пользователей, которые пользовались этим ботом:\n'
@@ -17,11 +24,11 @@ async def get_users(message: Message):
     text+='\nХочешь попасть в историю? Пиши команду /reg'
     await message.answer(text)
 
-@router.message(F.text == 'Анекдот')
+@router.message(F.text == 'Анекдот', StateFilter(None))
 async def get_anek(message: Message):
     anek = aneks[randint(0, len(aneks)-1)]
     await message.answer(anek)
 
-@router.message(F.text == 'Не нажимать')
-async def get_angry(message: Message):
-    await message.answer('Написано же "Не нажиамть"!!!')
+# @router.message(F.text == 'Не нажимать', )
+# async def get_angry(message: Message):
+#     await message.answer('Написано же "Не нажиамть"!!!')

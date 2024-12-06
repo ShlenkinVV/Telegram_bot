@@ -39,7 +39,7 @@ async def reg_three(message: Message, state: FSMContext):
         if user_added:
             await message.answer(f'Спасибо за регистрацию, {data['name']}', reply_markup=kb.main)
         else:
-            await message.answer('Ваш аккаунт телеграм уже зарегистрирован', reply_markup=kb.main);
+            await message.answer('Ваш аккаунт телеграм уже зарегистрирован', reply_markup=kb.main)
         await state.clear()
     else:
         await message.answer('Пожалуйста, введите текстовое сообщение.')
