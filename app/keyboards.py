@@ -7,14 +7,9 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup, InlineKeyboardButton)
 
 main = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text='Анекдот')],
-    [KeyboardButton(text='История пользователей', callback_data='get_users' ), KeyboardButton(text='Мои задачи')]
+    [KeyboardButton(text='Анекдот'), KeyboardButton(text='Мои задачи')],
+    [KeyboardButton(text='История пользователей'), KeyboardButton(text='About')]
 ], resize_keyboard=True)
-
-# main = InlineKeyboardMarkup(inline_keyboard=[
-#     [InlineKeyboardButton(text='Каталог', callback_data='catalog')],
-#     [InlineKeyboardButton(text='Корзина', callback_data='cart'), InlineKeyboardButton(text='Контакты', callback_data='contacts')]
-# ])
 
 
 dev_acc = InlineKeyboardMarkup(inline_keyboard=[
@@ -37,4 +32,8 @@ tasks_empty = InlineKeyboardMarkup(inline_keyboard=[
 
 cancel_add_task = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Отмена', callback_data='cancel_add_task')]
+])
+
+registration = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Зарегистрироваться', callback_data='reg')]
 ])
