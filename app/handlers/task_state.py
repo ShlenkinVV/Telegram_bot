@@ -66,7 +66,7 @@ async def remove_task_command(callback: CallbackQuery, state: FSMContext):
     await callback.message.edit_reply_markup(reply_markup=None)
     await callback.message.answer("Введите номер задачи, которую хотите удалить:", reply_markup=kb.cancel_add_task)
 
-@router.message(F.text, RmTaskState.waiting_for_rm_task)
+@router.message(RmTaskState.waiting_for_rm_task)
 async def remove_task(message: Message, state: FSMContext):
     if message.content_type == 'text':
         user_id = message.from_user.id
