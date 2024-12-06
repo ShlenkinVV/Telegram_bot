@@ -18,16 +18,17 @@ ADMIN_ID = os.getenv('ADMIN_ID')
 async def get_help(message: Message):
     await message.answer('Это команда /help', reply_markup=kb.dev_acc)
 
+
 @router.message(CommandStart())
 async def cmd_start(message: Message):
     if await catch_user(message.from_user.id, message.from_user.username):
         from run import bot
         await bot.send_message(ADMIN_ID, f'Пользователь {message.from_user.username} зашел в твой бот ')
-       # await send_mesg(ADMIN_ID, f'Пользователь {message.from_user.username} зашел в твой бот ')
 
     await message.answer(f"""
     Привет, {message.from_user.first_name}. Заходи - не бойся, выходи - не плачь\n
-/help - помощь\n/reg - регистрация""", reply_markup=kb.main)
+    """, reply_markup=kb.main)
+
 
 @router.message(Command('delete_user'), StateFilter(None))
 async def delete_user(message: Message):
@@ -47,6 +48,7 @@ async def delete_user(message: Message):
         else:
             await message.reply("Пожалуйста, укажите id пользователя для удаления.")
 
+
 @router.message(Command('users'), StateFilter(None))
 async def get_users_info(message: Message):
     if str(message.from_user.id) != ADMIN_ID:
@@ -58,6 +60,7 @@ async def get_users_info(message: Message):
             text += f'{user.id}) {user.name} - {user.relation} ({user.tg_username})\n'
 
         await message.answer(text)
+
 
 @router.message(Command('all_users'), StateFilter(None))
 async def get_all_users(message: Message):
