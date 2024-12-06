@@ -1,11 +1,11 @@
-from aiogram import Router
+from aiogram import Router, F
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command, StateFilter
 import app.database.requests as rq
 import app.keyboards as kb
-from aiogram.types import ReplyKeyboardRemove
+
 
 router = Router()
 # Класс состояний
@@ -13,11 +13,13 @@ class Reg(StatesGroup):
     name = State()
     relation = State()
 
-#Использование состояний
-@router.message(Command('reg'), StateFilter(None))
-async def reg_one(message: Message, state: FSMContext):
+
+@router.callback_query(F.data == 'reg', StateFilter(None))
+async def reg_one(callback: CallbackQuery, state: FSMContext):
     await state.set_state(Reg.name)     # Меняем состояние
-    await message.answer('Введите Ваше имя', reply_markup=kb.cancel_registration)
+    await callback.answer()
+    await callback.message.edit_reply_markup(reply_markup=None)
+    await callback.message.answer('Введите Ваше имя', reply_markup=kb.cancel_registration)
 
 
 
