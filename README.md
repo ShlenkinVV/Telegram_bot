@@ -1,6 +1,6 @@
 # Telegram_bot
 Телеграмм бот для портфолио. Не для комерческих целей. Написан с использованием Python 3.12,
-Postgres:14, Aiorgam:3.15, Docker. Ссылка на бота t.me/shlenkin_bot
+Postgres:14, Aiorgam:3.15, Docker. Ссылка на бота <a href=t.me/shlenkin_bot>тут</a>
 
 <h2>Функционал:</h2>
 Для всех пользователей:
