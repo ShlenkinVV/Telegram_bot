@@ -28,7 +28,7 @@ async def reg_two(message: Message, state: FSMContext):
     if message.content_type == 'text':
         await state.update_data(name=message.text)
         await state.set_state(Reg.relation)  # Меняем состояние
-        await message.answer('Кем вы приходитесь разрабу?(другом, сестрой, котом и т.д.)', reply_markup=kb.cancel_registration)
+        await message.answer('Кем вы приходитесь разработчику?(друг, сестра, кот и т.д.)', reply_markup=kb.cancel_registration)
     else:
         await message.answer('Пожалуйста, введите текстовое сообщение.', reply_markup=kb.cancel_registration)
 
