@@ -7,8 +7,8 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup, InlineKeyboardButton)
 
 main = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text='Анекдот'), KeyboardButton(text='Мои задачи')],
-    [KeyboardButton(text='История пользователей'), KeyboardButton(text='About')]
+    [KeyboardButton(text='Анекдот🙃'), KeyboardButton(text='Мои задачи📋')],
+    [KeyboardButton(text='История пользователей👨‍💻'), KeyboardButton(text='Aboutℹ️')]
 ], resize_keyboard=True)
 
 
@@ -17,21 +17,21 @@ dev_acc = InlineKeyboardMarkup(inline_keyboard=[
 ])
 
 cancel_registration = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Отмена', callback_data='cancel_registration')]
+    [InlineKeyboardButton(text='Отмена❌', callback_data='cancel_registration')]
 ])
 
 tasks = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Добавить задачу', callback_data='add_task')],
-    [InlineKeyboardButton(text='Удалить задачу', callback_data='remove_task')]
+    [InlineKeyboardButton(text='Добавить задачу➕', callback_data='add_task')],
+    [InlineKeyboardButton(text='Удалить задачу🗑️', callback_data='remove_task')]
 ])
 
 
 tasks_empty = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Добавить задачу', callback_data='add_task')]
+    [InlineKeyboardButton(text='Добавить задачу➕', callback_data='add_task')]
 ])
 
 cancel_add_task = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Отмена', callback_data='cancel_add_task')]
+    [InlineKeyboardButton(text='Отмена❌', callback_data='cancel_add_task')]
 ])
 
 registration = InlineKeyboardMarkup(inline_keyboard=[
