@@ -14,7 +14,7 @@ class MainState(StatesGroup):
     main = State()
 
 
-@router.message(F.text == 'История пользователей👨‍💻', StateFilter(None))
+@router.message(F.text.in_(['История пользователей👨‍💻','История пользователей']), StateFilter(None))
 async def get_users(message: Message):
     all_users = await rq.get_users()
     text = 'Список пользователей, которые пользовались этим ботом:\n'
@@ -25,12 +25,12 @@ async def get_users(message: Message):
     text+='\nХочешь попасть в историю? Жми на кнопку ниже'
     await message.answer(text, reply_markup=kb.registration)
 
-@router.message(F.text == 'Анекдот🙃', StateFilter(None))
+@router.message(F.text.in_(['Анекдот🙃','Анекдот']), StateFilter(None))
 async def get_anek(message: Message):
     anek = aneks[randint(0, len(aneks)-1)]
     await message.answer(anek)
 
-@router.message(F.text == 'Aboutℹ️', StateFilter(None))
+@router.message(F.text.in_(['Aboutℹ️', 'About']), StateFilter(None))
 async def get_info(message: Message):
     await message.answer(f"""
     Телеграмм бот для портфолио. Не для комерческих целей.

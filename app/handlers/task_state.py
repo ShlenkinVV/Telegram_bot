@@ -42,7 +42,7 @@ async def add_task(message: Message, state: FSMContext):
     else:
         await message.answer('Пожалуйста, введите текстовое сообщение.')
 
-@router.message(F.text == 'Мои задачи📋', StateFilter(None))
+@router.message(F.text.in_(['Мои задачи📋','Мои задачи']), StateFilter(None))
 async def list_tasks(message: Message,  user_id=None):
     if user_id is None:
         user_id = message.from_user.id
