@@ -27,8 +27,9 @@ async def get_users(message: Message):
 
 @router.message(F.text.in_(['Анекдот🙃','Анекдот']), StateFilter(None))
 async def get_anek(message: Message):
-    anek = aneks[randint(0, len(aneks)-1)]
-    await message.answer(anek)
+    index = randint(0, len(aneks)-1)
+    anek = aneks[index]
+    await message.answer(f'{index+1}/{len(aneks)}\n'+anek)
 
 @router.message(F.text.in_(['Aboutℹ️', 'About']), StateFilter(None))
 async def get_info(message: Message):
