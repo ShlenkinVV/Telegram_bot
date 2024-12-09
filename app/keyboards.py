@@ -37,3 +37,11 @@ cancel_add_task = InlineKeyboardMarkup(inline_keyboard=[
 registration = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Зарегистрироваться', callback_data='reg')]
 ])
+
+anek = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Ввести номер анекдота', callback_data='num_anek')]
+])
+
+cancel_chose_anek = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Отмена❌', callback_data='cancel_chose_anek')]
+])

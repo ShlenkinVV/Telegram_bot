@@ -4,8 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message
 import app.database.requests as rq
-from app.anekdots import aneks
-from random import randint
+
 import app.keyboards as kb
 
 router = Router()
@@ -25,11 +24,7 @@ async def get_users(message: Message):
     text+='\nХочешь попасть в историю? Жми на кнопку ниже'
     await message.answer(text, reply_markup=kb.registration)
 
-@router.message(F.text.in_(['Анекдот🙃','Анекдот']), StateFilter(None))
-async def get_anek(message: Message):
-    index = randint(0, len(aneks)-1)
-    anek = aneks[index]
-    await message.answer(f'{index+1}/{len(aneks)}\n'+anek)
+
 
 @router.message(F.text.in_(['Aboutℹ️', 'About']), StateFilter(None))
 async def get_info(message: Message):
